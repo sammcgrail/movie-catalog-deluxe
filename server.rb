@@ -1,6 +1,7 @@
-require 'sinatra'
+require "sinatra"
 require "csv"
 require "pg"
+require "pry"
 # require 'sinatra/flash'
 # enable :sessions
 
@@ -16,7 +17,7 @@ end
 def actors_names
   db_connection do |conn|
     conn.exec("SELECT name FROM actors
-              ORDER by actors.name")
+              ORDER by actors.name LIMIT 300")
   end
 end
 
@@ -39,14 +40,22 @@ end
 
 def movie_info
   db_connection do |conn|
-    conn.exec("SELECT genres.name as genre, studios.name as studio, actors.name as actors,
-               cast_members.character from movies
-               JOIN genres ON (movie.genre_id = genres.id)
+    conn.exec("SELECT genres.name as genre,
+    studios.name as studio,
+     actors.name as actors,
+      cast_members.character FROM movies
+               JOIN cast_members on (cast_members.movie_id = movies.id)
+               JOIN genres ON (movies.genre_id = genres.id)
                JOIN studios ON (movies.studio_id = studios.id)
-               WHERE movies.name = '#{params[:title]}'")
+               JOIN actors ON (cast_members.actor_id = actors.id)
+               WHERE movies.title = '#{params[:title]}'
+               ORDER by movies.title")
   end
 end
-
+#
+# This page should contain information about the movie
+# (including genre and studio) as well as a list of all of the actors
+#  and their roles. Each actor name is a link to the details page for that actor.
 
 
 get '/' do
@@ -62,7 +71,7 @@ get '/actors/:name' do
 end
 
 get '/movies' do
-  erb :'movies/index', locals: {movie_names: movie_names}
+  erb :'movies/index', locals: {movie_names: movie_names, movie: movie}
 end
 
 get '/movies/:title' do

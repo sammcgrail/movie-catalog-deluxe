@@ -1,7 +1,21 @@
 <h1><%= title %></h1>
+
+<%= movie_info[0] %>
+
 <ul>
+  <li>Genre: <%= movie_info[0]["genre"] %></li>
+  <li>Studio: <%= movie_info[0]["studio"] %></li>
+</ul>
+
   <% movie_info.each do |movie| %>
+    <li>Character: <%= movie["character"] %></li>
+    <li>Actor: <%= movie["actors"] %></li>
 
-    <li>Genre: <%= movie["genre"] %>
-
+    <br>
   <% end %>
+  <li><%= title %></li>
+
+  will show the details for the movie. This page should
+  contain information about the movie (including genre and studio)
+  as well as a list of all of the actors and their roles.
+   Each actor name is a link to the details page for that actor.
