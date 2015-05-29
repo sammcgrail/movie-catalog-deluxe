@@ -32,7 +32,7 @@ end
 
 def movie_names
   db_connection do |conn|
-    conn.exec("SELECT movies.title, movies.rating, movies.year, genres.name
+    conn.exec("SELECT movies.title, movies.rating, movies.year, genres.name FROM movies
                JOIN genres ON (movies.genre_id = genres.id)
                ORDER by movies.title")
   end
