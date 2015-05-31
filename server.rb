@@ -71,7 +71,7 @@ get '/actors/:name' do
 end
 
 get '/movies' do
-  erb :'movies/index', locals: {movie_names: movie_names, movie: movie}
+  erb :'movies/index', locals: {title: params[:title], movie_names: movie_names, movie_info: movie_info}
 end
 
 get '/movies/:title' do

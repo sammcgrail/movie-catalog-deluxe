@@ -1,12 +1,7 @@
-<h1><%= name %></h1>
-
+<h2><%= name %></h2>
+<h4>List of movies starred in: </h4>
 <% actors_info.each do |actor| %>
-  <li><%= actor["character"] %></li>
-  <li><a href="/movies/<%= actor["title"] %>"><%=actor["title"] %></a></li>
-  <li><%=actor["cast_members"] %></li>
+  <li>Character: <%= actor["character"] %></li>
+  <li>Movie: <a href="/movies/<%= actor["title"] %>"><%=actor["title"] %></a></li>
+  <br>
 <% end %>
-
-This page should contain a
-list of movies that the actor has starred in
-and what their role was. Each movie
-should link to the details page for that movie.
