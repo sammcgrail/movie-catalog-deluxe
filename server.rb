@@ -32,8 +32,9 @@ end
 
 def movie_names
   db_connection do |conn|
-    conn.exec("SELECT movies.title, movies.rating, movies.year, genres.name FROM movies
+    conn.exec("SELECT movies.title, movies.rating, movies.year, genres.name as genre, studios.name as studio FROM movies
                JOIN genres ON (movies.genre_id = genres.id)
+               JOIN studios ON (movies.studio_id = studios.id)
                ORDER by movies.title")
   end
 end
@@ -52,10 +53,6 @@ def movie_info
                ORDER by movies.title")
   end
 end
-#
-# This page should contain information about the movie
-# (including genre and studio) as well as a list of all of the actors
-#  and their roles. Each actor name is a link to the details page for that actor.
 
 
 get '/' do

@@ -1,5 +1,7 @@
 <h1>Actors</h1>
-
+<a href="/movies">Go to to all movies</a>
+<br>
+<br>
 <% actors_names.each do |actor| %>
   <li><a href="/actors/<%= actor["name"] %>"><%= actor["name"] %></li>
 <% end %>

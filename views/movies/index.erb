@@ -1,6 +1,14 @@
 <h1>Movies</h1>
-
-
+<a href="/actors">Go to to all actors</a><br>
+<br>
+Need to use a table!
+<br>
+<br>
 <% movie_names.each do |movie| %>
-  <li><a href="/movies/<%= movie["title"] %>"><%= movie["title"] %></a></li>
+  <li>Title: <a href="/movies/<%= movie["title"] %>"><%= movie["title"] %></a></li>
+  <li>Year released: <%= movie["year"] %> </li>
+  <li>Rating: <%= movie["rating"] %> </li>
+  <li>Genre: <%= movie["genres"] %> </li>
+  <li>Studio: <%= movie["studio"] %> </li>
+  <br>
 <% end %>
